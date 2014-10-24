@@ -15,8 +15,6 @@ var uuid = require('node-uuid');
 
 app.set('port', process.env.PORT ||  7000);
 
-
-
 io.sockets.on('connection', function (socket) {
 
     console.log('socket connected'.yellow);
@@ -24,16 +22,12 @@ io.sockets.on('connection', function (socket) {
     socket.on('message', function (data) { //any object
         data = JSON.parse(data);
         console.log('Message: ', data);
-        console.log(data.apiKey + ":" + data.roomId);
     });
 
     socket.on('disconnect', function () {
         console.log('user disconnected: '.red, socket.id);
-        // delete from participants and broadcast it.
     });
-
 });
-
 
 app.post('/api/readings', function(req, res){
 	console.log('post readings');
