@@ -34,6 +34,20 @@ io.sockets.on('connection', function (socket) {
 
 });
 
+
+app.post('/api/readings', function(req, res){
+	console.log('post readings');
+	console.log(req);
+	res.end('ok');
+		
+});
+
+app.get('/api/hello', function(req, res){
+	console.log('get hello');
+	res.end('ok');
+});
+
+
 server.listen(app.get('port'), function () {
   console.log('Express server listening on port '.yellow + app.get('port'));
 });
