@@ -16,7 +16,7 @@ var bodyParser  = require('body-parser');
 var cors = require('cors');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart({
-    uploadDir: './myTemp'
+    uploadDir: './shakeit'
 });
 
 
@@ -96,6 +96,14 @@ app.post('/api/uploadPicture', multipartMiddleware, function(req, res){
 
     var username = req.get('username') || "";
     var fileUploadPath = req && req.files && req.files.fileUpload.path;
+    console.log(fileUploadPath);
+
+
+    fumpers[username] = fumpers[username] || {username:username};
+    fumpers[username].image = "/"+fileUploadPath;
+    
+
+    res.end("ok");
 
 
 });
