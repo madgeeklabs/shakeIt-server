@@ -41,7 +41,7 @@ io.sockets.on('connection', function (socket) {
         var response = [];
         check(data.timeStamp, data.username, response);
         console.log(response);
-        if (response) {
+        if (response.length > 0) {
             console.log('talk to the other');
             response.socket.emit('shaked', 'and nicely');
         }
