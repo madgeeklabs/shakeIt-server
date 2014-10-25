@@ -29,8 +29,6 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.options('*', cors());
 
-
-
 var fumpers = {};
 var THRESHOLD = 500;
 
@@ -39,7 +37,7 @@ function check(currentTimeStamp, currentId, response) {
     for (var key in fumpers) {
         console.log("compairing: " + Math.abs(currentTimeStamp - fumpers[key].timeStamp));
         if (Math.abs(currentTimeStamp - fumpers[key].timeStamp) < THRESHOLD && currentId != fumpers[key].username) {
-            var elementResponse = {timeStamp : fumpers[key].timeStamp, username : fumpers[key].username, socket:  fumpers[key].socket};
+            var elementResponse = {amount: fumpers[key].amount, timeStamp : fumpers[key].timeStamp, username : fumpers[key].username, socket:  fumpers[key].socket};
             response.push(elementResponse);
             console.log("added to reponse one match ".green + fumpers[key].username);
         }
