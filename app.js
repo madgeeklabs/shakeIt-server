@@ -63,7 +63,9 @@ io.sockets.on('connection', function (socket) {
             console.log('talk to the other');
             var copyUser = lodash.clone(response[0]);
             delete copyUser.socket;
-            response[0].socket.emit('shaked', copyUser);
+            var copyOfMe = lodash.clone(fumpers[data.username]);
+            delete copyOfMe.socket;
+            response[0].socket.emit('shaked', copyOfMe);
             socket.emit('shaked', copyUser);
         }
     });
