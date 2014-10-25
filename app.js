@@ -12,7 +12,7 @@ var _ = require('underscore');
 var async = require('async');
 var uuid = require('node-uuid');
 var fumpers = {};
-var THRESHOLD = 1000;
+var THRESHOLD = 500;
 
 function check(currentTimeStamp, currentId, response) {
     console.log('number of fumps in comparison ' + Object.keys(fumpers).length);
@@ -36,10 +36,15 @@ io.sockets.on('connection', function (socket) {
     socket.on('message', function (data) { //any object
         data = JSON.parse(data);
         console.log('Message: ', data);
+        data.socket = socket;
         fumpers[data.username] = data;
         var response = [];
         check(data.timeStamp, data.username, response);
         console.log(response);
+        if (response) {
+            console.log('talk to the other');
+            response.socket.emit('shaked', 'and nicely');
+        }
     });
 
     socket.on('disconnect', function () {
