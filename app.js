@@ -58,7 +58,7 @@ io.sockets.on('connection', function (socket) {
         fumpers[data.username] = data;
         var response = [];
         check(data.timeStamp, data.username, response);
-        console.log(response);
+       
         if (response.length > 0) {
             console.log('talk to the other');
             var copyUser = lodash.clone(response[0]);
@@ -66,6 +66,8 @@ io.sockets.on('connection', function (socket) {
             var copyOfMe = lodash.clone(fumpers[data.username]);
             delete copyOfMe.socket;
             response[0].socket.emit('shaked', copyOfMe);
+            console.log(copyUser);
+            console.log(copyOfMe);
             socket.emit('shaked', copyUser);
         }
     });
@@ -99,14 +101,10 @@ app.post('/api/uploadPicture', multipartMiddleware, function(req, res){
     console.log(fileUploadPath);
     console.log('for: ' + username);
 
-
     fumpers[username] = fumpers[username] || {username:username};
     fumpers[username].image = "/"+fileUploadPath;
     
-
     res.end("ok");
-
-
 });
 
 
