@@ -11,6 +11,26 @@ var lodash  = require('lodash').noConflict();
 var _ = require('underscore');
 var async = require('async');
 var uuid = require('node-uuid');
+
+var bodyParser  = require('body-parser');
+var cors = require('cors');
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart({
+    uploadDir: './myTemp'
+});
+
+
+
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+//CORS for all origins
+app.use(cors());
+app.options('*', cors());
+
+
+
 var fumpers = {};
 var THRESHOLD = 500;
 
@@ -68,6 +88,23 @@ app.get('/api/hello', function(req, res){
 });
 
 
+app.post('/api/uploadPicture', multipartMiddleware, function(req, res){
+  // create a form to begin parsing
+    console.log('something received ');
+    //console.log(req.files);
+    //console.log(req.body);
+
+    var username = req.get('username') || "";
+    var fileUploadPath = req && req.files && req.files.fileUpload.path;
+
+
+});
+
+
 server.listen(app.get('port'), function () {
   console.log('Express server listening on port '.yellow + app.get('port'));
 });
+
+
+
+

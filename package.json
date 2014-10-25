@@ -3,14 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "socket.io" : "1.1.X",
-    "body-parser": "*",
+    "socket.io": "1.1.X",
+    "body-parser": "~1.9.1",
     "colors": "*",
     "express": "4.X",
     "lodash": "~2.3.0",
-    "underscore" : "*",
-    "async" : "*",
-    "node-uuid" : "*",
-    "debug" : "*"
+    "underscore": "*",
+    "async": "*",
+    "node-uuid": "*",
+    "debug": "*",
+    "cors": "~2.5.0",
+    "connect-multiparty": "~1.2.5"
   }
 }
