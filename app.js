@@ -30,6 +30,7 @@ app.use(cors());
 app.options('*', cors());
 
 var fumpers = {};
+var images = {};
 var THRESHOLD = 900;
 
 function check(currentTimeStamp, currentId, response) {
@@ -37,7 +38,7 @@ function check(currentTimeStamp, currentId, response) {
     for (var key in fumpers) {
         console.log("compairing: " + Math.abs(currentTimeStamp - fumpers[key].timeStamp));
         if (Math.abs(currentTimeStamp - fumpers[key].timeStamp) < THRESHOLD && currentId != fumpers[key].username) {
-            var elementResponse = {image: fumpers[key].image, operation: fumpers[key].operation, ammount: fumpers[key].ammount, timeStamp : fumpers[key].timeStamp, username : fumpers[key].username, socket:  fumpers[key].socket};
+            var elementResponse = {image: images[key].image, operation: fumpers[key].operation, ammount: fumpers[key].ammount, timeStamp : fumpers[key].timeStamp, username : fumpers[key].username, socket:  fumpers[key].socket};
             response.push(elementResponse);
             console.log("added to reponse one match ".green + fumpers[key].username);
         }
@@ -65,6 +66,7 @@ io.sockets.on('connection', function (socket) {
             delete copyUser.socket;
             var copyOfMe = lodash.clone(fumpers[data.username]);
             delete copyOfMe.socket;
+            copyOfMe.image = images[data.username].image
             response[0].socket.emit('shaked', copyOfMe);
             console.log(copyUser);
             console.log(copyOfMe);
@@ -101,11 +103,11 @@ app.post('/api/uploadPicture', multipartMiddleware, function(req, res){
     console.log(fileUploadPath);
     console.log('for: ' + username);
 
-    fumpers[username] = fumpers[username] || {username:username};
-    fumpers[username].image = "/"+fileUploadPath;
+    images[username] = images[username] || {username:username};
+    images[username].image = "/"+fileUploadPath;
 
-    console.log(fumpers[username]);
-    console.log(fumpers);
+    console.log(images[username]);
+    console.log(images);
     
     res.end("ok");
 });
