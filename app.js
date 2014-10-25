@@ -103,6 +103,9 @@ app.post('/api/uploadPicture', multipartMiddleware, function(req, res){
 
     fumpers[username] = fumpers[username] || {username:username};
     fumpers[username].image = "/"+fileUploadPath;
+
+    console.log(fumpers[username]);
+    console.log(fumpers);
     
     res.end("ok");
 });
