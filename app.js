@@ -43,7 +43,7 @@ io.sockets.on('connection', function (socket) {
         console.log(response);
         if (response.length > 0) {
             console.log('talk to the other');
-            var copyUser = response[0];
+            var copyUser = lodash.clone(response[0]);
             delete copyUser.socket;
             response[0].socket.emit('shaked', copyUser);
             socket.emit('shaked', 'and nicely');
