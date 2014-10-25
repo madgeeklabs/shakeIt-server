@@ -67,7 +67,9 @@ io.sockets.on('connection', function (socket) {
             var copyOfMe = lodash.clone(fumpers[data.username]);
             delete copyOfMe.socket;
             copyOfMe.image = images[data.username].image;
-            copyOfMe.ammount = copyUser.ammount;
+            var sum = copyOfMe.ammount + copyUser.ammount;
+            copyOfMe.ammount = sum;
+            copyUser.ammount = sum;
             response[0].socket.emit('shaked', copyOfMe);
             console.log(copyUser);
             console.log(copyOfMe);
