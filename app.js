@@ -21,7 +21,7 @@ function check(currentTimeStamp, currentId, response) {
         if (Math.abs(currentTimeStamp - fumpers[key].timeStamp) < THRESHOLD && currentId != fumpers[key].username) {
             var elementResponse = {timeStamp : fumpers[key].timeStamp, username : fumpers[key].username };
             response.push(elementResponse);
-            console.log("added to reponse one match ".green + JSON.stringify(fumpers[key]));
+            console.log("added to reponse one match ".green + fumpers[key].username);
         }
     }
     console.log('finished checking fumpers');
