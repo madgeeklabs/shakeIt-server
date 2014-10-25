@@ -30,14 +30,14 @@ app.use(cors());
 app.options('*', cors());
 
 var fumpers = {};
-var THRESHOLD = 500;
+var THRESHOLD = 900;
 
 function check(currentTimeStamp, currentId, response) {
     console.log('number of fumps in comparison ' + Object.keys(fumpers).length);
     for (var key in fumpers) {
         console.log("compairing: " + Math.abs(currentTimeStamp - fumpers[key].timeStamp));
         if (Math.abs(currentTimeStamp - fumpers[key].timeStamp) < THRESHOLD && currentId != fumpers[key].username) {
-            var elementResponse = {ammount: fumpers[key].ammount, timeStamp : fumpers[key].timeStamp, username : fumpers[key].username, socket:  fumpers[key].socket};
+            var elementResponse = {operation: fumpers[key].operation, ammount: fumpers[key].ammount, timeStamp : fumpers[key].timeStamp, username : fumpers[key].username, socket:  fumpers[key].socket};
             response.push(elementResponse);
             console.log("added to reponse one match ".green + fumpers[key].username);
         }
