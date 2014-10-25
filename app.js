@@ -97,6 +97,7 @@ app.post('/api/uploadPicture', multipartMiddleware, function(req, res){
     var username = req.get('username') || "";
     var fileUploadPath = req && req.files && req.files.fileUpload.path;
     console.log(fileUploadPath);
+    console.log('for: ' + username);
 
 
     fumpers[username] = fumpers[username] || {username:username};
