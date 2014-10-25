@@ -43,7 +43,8 @@ io.sockets.on('connection', function (socket) {
         console.log(response);
         if (response.length > 0) {
             console.log('talk to the other');
-            response.socket.emit('shaked', 'and nicely');
+            response[0].socket.emit('shaked', 'and nicely');
+            socket.emit('shaked', 'and nicely');
         }
     });
 
